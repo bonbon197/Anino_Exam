@@ -10,11 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_03_114827) do
+ActiveRecord::Schema.define(version: 2023_05_03_144637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "score"
+    t.integer "rank"
+    t.string "name"
+    t.bigint "user_id"
+    t.bigint "leaderboard_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["leaderboard_id"], name: "index_entries_on_leaderboard_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
+  create_table "leaderboards", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.uuid "_id", default: -> { "gen_random_uuid()" }, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -23,4 +42,6 @@ ActiveRecord::Schema.define(version: 2023_05_03_114827) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "entries", "leaderboards"
+  add_foreign_key "entries", "users"
 end
