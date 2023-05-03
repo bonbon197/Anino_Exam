@@ -136,6 +136,7 @@ GEM
     timeout (0.3.2)
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
+    uuidtools (2.2.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -153,6 +154,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  uuidtools
 
 RUBY VERSION
    ruby 2.6.10p210
