@@ -23,6 +23,13 @@ class Api::V1::Leaderboard::EntryController < ApplicationController
       
       
       if entry.save
+        # check if the user is now in first place
+        first_place_user = leaderboard.entries.order(score: :desc).first.user
+        if first_place_user.id == user.id
+          FakeUserWorker.perform_async(leaderboard.id, user.id)
+        end
+
+
         response_data = {
           entry: {
             _id: entry.id,

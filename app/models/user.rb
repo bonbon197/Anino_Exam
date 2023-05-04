@@ -4,4 +4,6 @@ class User < ApplicationRecord
 
     has_many :entries
     has_many :leaderboards, through: :entries
+
+    validates :name, presence: true
 end

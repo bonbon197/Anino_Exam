@@ -21,6 +21,7 @@ To set up the application, follow these steps:
 ## Running the Application
 
 To run the application, use the following command: `rails s`. This will start a local server at `http://localhost:3000`.
+To run the FakeUser that will score in the leaderboards until it becomes the top, use the following command `bundle exec sidekiq`
 
 ## API Endpoints
 
