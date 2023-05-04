@@ -10,11 +10,11 @@ class Api::V1::LeaderboardController < ApplicationController
       
             sorted_entries = leaderboard.entries.includes(:user).order(score: :desc, created_at: :asc).paginate(page: page, per_page: per_page)
       
-            entries = sorted_entries.map do |entry|{
+            entries = sorted_entries.map.with_index do |entry, index|{
                   score: entry.score,
                   user_id: entry.user._id,
                   scored_at: entry.created_at,
-                  rank: entry.rank,
+                  rank: index,
                   name: entry.user.name
                 }
             end
