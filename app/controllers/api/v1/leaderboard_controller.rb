@@ -1,4 +1,5 @@
 #leaderboard controller without the admin namespace
+require_relative '../../../models/leaderboard.rb'
 class Api::V1::LeaderboardController < ApplicationController
     #get leaderboard based on :_id
     def show
@@ -9,12 +10,12 @@ class Api::V1::LeaderboardController < ApplicationController
       
             sorted_entries = leaderboard.entries.includes(:user).order(score: :desc, created_at: :asc).paginate(page: page, per_page: per_page)
       
-            entries = sorted_entries.map do |entry|                {
+            entries = sorted_entries.map do |entry|{
                   score: entry.score,
                   user_id: entry.user._id,
                   scored_at: entry.created_at,
                   rank: entry.rank,
-                  name: entry.name
+                  name: entry.user.name
                 }
             end
 
