@@ -63,6 +63,11 @@ Creates a new entry for the specified leaderboard. The request body should conta
 
 To run the test suite, use the following command: `bundle exec rspec`.
 
+
+## Missing features from the exam outline
+
+This output is missing the paginated leaderboards
+
 ## Author
 
 Antonio Dapat III
