@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_03_144637) do
+ActiveRecord::Schema.define(version: 2023_05_04_120535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -20,12 +20,10 @@ ActiveRecord::Schema.define(version: 2023_05_03_144637) do
     t.integer "score"
     t.integer "rank"
     t.string "name"
-    t.bigint "user_id"
-    t.bigint "leaderboard_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["leaderboard_id"], name: "index_entries_on_leaderboard_id"
-    t.index ["user_id"], name: "index_entries_on_user_id"
+    t.uuid "user_id"
+    t.uuid "leaderboard_id"
   end
 
   create_table "leaderboards", force: :cascade do |t|
@@ -33,6 +31,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_144637) do
     t.uuid "_id", default: -> { "gen_random_uuid()" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["_id"], name: "index_leaderboards_on__id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,8 +39,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_144637) do
     t.uuid "_id", default: -> { "gen_random_uuid()" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["_id"], name: "index_users_on__id", unique: true
   end
 
-  add_foreign_key "entries", "leaderboards"
-  add_foreign_key "entries", "users"
 end

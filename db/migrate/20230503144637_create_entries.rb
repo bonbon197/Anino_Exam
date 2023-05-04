@@ -4,9 +4,10 @@ class CreateEntries < ActiveRecord::Migration[5.2]
       t.integer :score
       t.integer :rank
       t.string :name
-      t.references :user, foreign_key: true
-      t.references :leaderboard, foreign_key: true
+      t.uuid :user_id
+      t.uuid :leaderboard_id
 
+      
       t.timestamps
     end
   end

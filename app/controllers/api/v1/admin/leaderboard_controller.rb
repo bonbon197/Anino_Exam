@@ -3,7 +3,7 @@ class Api::V1::Admin::LeaderboardController < ApplicationController
     #create a leaderboard
     #api/v1/admin/leaderboard?leaderboard[name]="your value"
     def create
-        leaderboard = Leaderboard.new(leaderboard_params)
+        leaderboard = ::Leaderboard.new(leaderboard_params)
         if leaderboard.save
             render json: leaderboard.as_json(only: [:name, :_id]), status: :created
         else
